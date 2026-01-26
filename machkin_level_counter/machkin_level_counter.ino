@@ -3,7 +3,7 @@
 #define PINBTS 0
 #define PINBTU 2
 #define PINBTD 3
-#define NUMPIXELS 10
+#define NUMPIXELS 11
 #define BRIGHTNESS 10
 #define GAMERS 8
 
@@ -63,12 +63,14 @@ void showGamer(){
     userChDelay=1500;
     if(gamer[gamerId[cGamer]].level>0){
       strip.clear();
+      strip.setPixelColor(10,gamer[gamerId[cGamer]].color);
       strip.fill(gamer[gamerId[cGamer]].color,0,gamer[gamerId[cGamer]].level);  
       strip.setBrightness(BRIGHTNESS);
       strip.show();
     }
   }else if(selMode>0 && selMode <= GAMERS-shift){
     strip.clear();
+    strip.setPixelColor(10,strip.Color(0,255,0));
     strip.fill(gamer[gamerId[selMode-1]].color,0,gamer[gamerId[selMode-1]].level);
     strip.setBrightness(BRIGHTNESS);
     strip.show();    
@@ -81,7 +83,7 @@ void showGamer(){
         showRandom();
       }else{
         strip.clear();
-        strip.fill(strip.Color(0,0,255),9,1);
+        strip.setPixelColor(10,strip.Color(0,0,255));
         strip.show();
       } 
     }  
@@ -93,6 +95,7 @@ void showGamer(){
 
 void showConfirm(){
   strip.clear();
+  strip.setPixelColor(10,strip.Color(0,0,255));
   for(int i=0; i<NUMPIXELS; i++){
     strip.setPixelColor(i,strip.Color(random(255),random(255),random(255)));  
     strip.setBrightness(BRIGHTNESS);
@@ -103,8 +106,9 @@ void showConfirm(){
 
 void showRandom(){
   strip.clear();
+  strip.setPixelColor(10,strip.Color(255,255,255));
   for(int i=0; i<rnd; i++){
-    strip.setPixelColor(i,strip.Color(random(10,255),random(10,255),random(10,255)));
+    strip.setPixelColor(i,strip.Color(255,255,255));
   }
   strip.setBrightness(BRIGHTNESS-5);
   strip.show();
@@ -171,7 +175,7 @@ void loop() {
         }
         if(selMode==(GAMERS-shift+1)){
           showRnd = true;
-          rnd=(int)random(NUMPIXELS)+1;
+          rnd=(int)random(NUMPIXELS);
           showRandom();
         }
         showGamer();
