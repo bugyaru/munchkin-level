@@ -4,7 +4,7 @@
 #define PINBTU 2
 #define PINBTD 3
 #define NUMPIXELS 11
-#define BRIGHTNESS 10
+#define BRIGHTNESS 15
 #define GAMERS 8
 
 struct Gamer {
@@ -70,7 +70,7 @@ void showGamer(){
     }
   }else if(selMode>0 && selMode <= GAMERS-shift){
     strip.clear();
-    strip.setPixelColor(10,strip.Color(0,255,0));
+    strip.setPixelColor(10,strip.Color(0,255,50));
     strip.fill(gamer[gamerId[selMode-1]].color,0,gamer[gamerId[selMode-1]].level);
     strip.setBrightness(BRIGHTNESS);
     strip.show();    
@@ -100,6 +100,7 @@ void showConfirm(){
     strip.setPixelColor(i,strip.Color(random(255),random(255),random(255)));  
     strip.setBrightness(BRIGHTNESS);
     strip.show();
+    delay(100);
   }
   delay(200);
 }
@@ -175,7 +176,7 @@ void loop() {
         }
         if(selMode==(GAMERS-shift+1)){
           showRnd = true;
-          rnd=(int)random(NUMPIXELS);
+          rnd=(int)random(NUMPIXELS-1)+1;
           showRandom();
         }
         showGamer();
