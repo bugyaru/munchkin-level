@@ -15,22 +15,23 @@ https://aliexpress.ru/item/1005006629273407.html?spm=a2g2w.orderdetail.0.0.6dd24
 ## Схема включения элементов
 
 ```mermaid  
-graph TB
+graph LR
 	subgraph "attiny85"
 		P0
 		P1
 		P2 
 		P3
-		P4
-		P5
 		VIN
 		5V
 		GND0("GND")
+		P4
+		P5
+		USB1("USB")
 	end
 	subgraph "VK"
-		Left
-		Midle
-		Right
+		V1("0")
+		V2("0")
+		V3("0")
 	end
 	subgraph "PWR18650"
 		In+
@@ -39,31 +40,32 @@ graph TB
 		GOut
 		B+
 		B-
+		USB2("USB")
 	end
 	subgraph "Strip WS2812"
 		l1("Plus")
 		l2("Data")
 		l3("Minus")
 	end
-	subgraph "Button 'Select'"
-		S1("1")
-		S2("2")
+	subgraph "Btn 'Select'"
+		S1("0")
+		S2("0")
 	end
-	subgraph "Button 'Up'"
-		U1("1")
-		U2("2")
+	subgraph "Btn 'Up'"
+		U1("0")
+		U2("0")
 	end
-	subgraph "Button 'Down'"
-		D1("1")
-		D2("2")
+	subgraph "Btn 'Down'"
+		D1("0")
+		D2("0")
 	end
 	subgraph "18650"
 		B1("Plus")
 		B2("Minus")
 	end
-5V o--o Midle  
-Left o--o In+  
-Right o--o Out+  
+5V o--o V2  
+V1 o--o In+  
+V3 o--o Out+  
 GND0 o--o GIn  
 VIN o--o l1 
 GOut o--o l3
@@ -71,8 +73,8 @@ P0 o--o S1
 P1 o--o l2  
 P2 o--o U1  
 P3 o--o D1  
-U2 o--o D2  
-D2 o--o S2  
+D2 o--o U2  
+U2 o--o S2  
 S2 o--o GOut  
 B1 o--o B+  
 B2 o--o B-
